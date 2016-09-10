@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{57A4205B-98AF-4EAC-ACE6-50BCC310F935}</ProjectGuid>
+    <ProjectGuid>{62526355-3A2A-4F70-A4F1-F59519ACDC23}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>My11502</RootNamespace>
+    <RootNamespace>My1924</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -142,7 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="11502.cpp" />
+    <ClCompile Include="1924.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
