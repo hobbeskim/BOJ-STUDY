@@ -1,3 +1,7 @@
 ﻿  1913.cpp
+c:\users\hobbes\source\repos\boj-study\1week\1913\1913.cpp(10): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1270): note: 'scanf' 선언을 참조하십시오.
+c:\users\hobbes\source\repos\boj-study\1week\1913\1913.cpp(11): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1270): note: 'scanf' 선언을 참조하십시오.
   1913.vcxproj -> C:\Users\hobbes\Source\Repos\BOJ-STUDY\1week\Debug\1913.exe
   1913.vcxproj -> C:\Users\hobbes\Source\Repos\BOJ-STUDY\1week\Debug\1913.pdb (Full PDB)

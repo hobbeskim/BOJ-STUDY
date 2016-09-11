@@ -6,7 +6,7 @@ int prime[168] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 5
 void sortInArray(int arr[][4], int N);
 int findPrimeCombi(int arr[][4], int N);
 
-int main(int argc, const char * argv[])
+int main(void)
 {
 	/* BOJ#11502 */
 
@@ -18,17 +18,13 @@ int main(int argc, const char * argv[])
 	for (int i = 0; i<N; i++)
 	{/*사용자가 입력하는 판단 대상 수 배열에 넣음 */
 		scanf("%d", &arr[i][0]);
+		findPrimeCombi(arr, i);
 	}
-
-	for (int j = 0; j<N+1; j++)
-	{/*arr의 행을 순회하며 findPrimeCombi 호출*/
-		findPrimeCombi(arr, j);
-	}
-
-	sortInArray(arr, N);
 	
-	getchar();
-	getchar();
+	//for (int j = 0; j<N; j++)
+	/*arr의 행을 순회하며 findPrimeCombi 호출*/
+		//findPrimeCombi(arr, j);
+	
 
 	return 0;
 }
@@ -42,20 +38,20 @@ int findPrimeCombi(int arr[][4], int N)
 		{
 			for (k = 0; k<168; k++)
 			{
-				if (arr[N - 1][0] == (prime[i] + prime[j] + prime[k]))
+				if (arr[N][0] == (prime[i] + prime[j] + prime[k]))
 				{/*조건을 만족하는 소수 발견시*/
-					arr[N - 1][1] = prime[i];
-					arr[N - 1][2] = prime[j];
-					arr[N - 1][3] = prime[k];//arr에 소수 값 저장
-					sortInArray(arr, N-1);//배열 정렬
- 					printf("%d %d %d \n", arr[N-1][1], arr[N - 1][2], arr[N - 1][3]);
+					arr[N][1] = prime[i];
+					arr[N][2] = prime[j];
+					arr[N][3] = prime[k];//arr에 소수 값 저장
+					sortInArray(arr, N);//배열 정렬
+ 					printf("%d %d %d \n", arr[N][1], arr[N][2], arr[N][3]);
 					return 0;
 				}
 				else if (i == 168 && j == 168 && k == 168)
 				{//탐색 실패시, 0 출력
-					arr[N - 1][1] = 0;
-					arr[N - 1][2] = 0;
-					arr[N - 1][3] = 0;
+					arr[N][1] = 0;
+					arr[N][2] = 0;
+					arr[N][3] = 0;
 					printf("%d\n", 0);
 					return 1;
 				}
