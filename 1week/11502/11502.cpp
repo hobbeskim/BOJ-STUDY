@@ -1,35 +1,41 @@
-
 #include <stdio.h>
 #include<stdlib.h>
 
-
-int prime[168] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 197, 199,203, 209, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293,307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397,401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499,503, 509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599,601, 607, 613, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691,701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797,809, 811, 821, 823, 827, 829, 837, 853, 857, 859, 863, 877, 881, 883, 887,907, 911, 919, 929,937, 941, 947, 953, 967, 971, 977, 983, 991, 997 };
-
-/*Function prototype*/
+int prime[168];
 void sortInArray(int **arr, int N);
 int findPrimeCombi(int **arr, int N);
 
 int main(void)
 {
-	/* BOJ#11502 */
+	int tmp[1001] = { 0, }, cnt = 0;
+	for (int i = 2; i < 1000; ++i) tmp[i] = 1; // 1을 제외한 나머지를 소수로 가정
+	for (int i = 2; i <= 1000 / 2; ++i) {
+		for (int j = 2; j <= 1000 / i; ++j) {
+			tmp[i*j] = 0;   // 배수를 소수에서 제외시킴
+		}
+	}
+	for (int i = 1; i < 1000; ++i) { // 소수만 p배열에 저장
+		if (tmp[i] == 1) {
+			prime[cnt++] = i;
+		}
+	}
 
 	int N = 0; // 사용자의 입력 변수 
 	scanf("%d", &N); // 사용자 입력
-	
+
 	int **arr;
-	arr = (int **) malloc ( sizeof(int *) * N);
-	arr[0] = (int *) malloc ( sizeof(int) * N*4 );
-	for( int i=1; i<N; i++){
-	arr[i] = arr[ i-1 ] + 4;
+	arr = (int **)malloc(sizeof(int *)* N);
+	arr[0] = (int *)malloc(sizeof(int)* N * 4);
+	for (int i = 1; i<N; i++) {
+		arr[i] = arr[i - 1] + 4;
 	}
-	
 
 	for (int i = 0; i<N; i++)
 	{/*사용자가 입력하는 판단 대상 수 배열에 넣음 */
 		scanf("%d", &arr[i][0]);
 		//findPrimeCombi(arr, i);
 	}
-	
+
 	for (int j = 0; j < N; j++) {
 		/*arr의 행을 순회하며 findPrimeCombi 호출*/
 		findPrimeCombi(arr, j);
@@ -38,10 +44,10 @@ int main(void)
 	free(arr);
 	return 0;
 }
+
 int findPrimeCombi(int **arr, int N)
 {/*삼중 for 문이 1000이하 소수 배열을 순회하며 탐색*/
 	int i, j, k;
-
 	for (i = 0; i<168; i++)
 	{
 		for (j = 0; j<168; j++)
@@ -50,42 +56,23 @@ int findPrimeCombi(int **arr, int N)
 			{
 				if (arr[N][0] == (prime[i] + prime[j] + prime[k]))
 				{/*조건을 만족하는 소수 발견시*/
-					arr[N][1] = prime[i];
-					arr[N][2] = prime[j];
-					arr[N][3] = prime[k];//arr에 소수 값 저장
-					sortInArray(arr, N);//배열 정렬
- 					printf("%d %d %d\n", arr[N][1], arr[N][2], arr[N][3]);
+					printf("%d %d %d\n", prime[i], prime[j], prime[k]);
 					return 0;
 				}
-				else if (i == 168 && j == 168 && k == 168)
+				else if (i == 167 && j == 167 && k == 167)
 				{//탐색 실패시, 0 출력
-					arr[N][1] = 0;
-					arr[N][2] = 0;
-					arr[N][3] = 0;
 					printf("%d\n", 0);
 					return 1;
 				}
 			}
 		}
 	}
-
 }
-void sortInArray(int ** arr, int N)
-{/*문제 조건에 따른 오름차순 정렬 함수*/
-	int temp;
-	int i, j;
-
-		for (i = 1; i<3; i++)
-		{
-			for (j = i + 1; j<4; j++)
-			{
-				if (arr[N][i]>arr[N][j])
-				{
-					temp = arr[N][j];
-					arr[N][j] = arr[N][i];
-					arr[N][i] = temp;
-
-				}
-			}
-		}
-}
+/*이거 참 디버깅하느라 고생했다. ㅋㅋㅋㅋ 
+2차원 배열 동적배열 써서 풀어보고 그랬는데,
+입력->출력->입력->출력이 더 좋은 풀이 방법이라고 한다..
+그럼 근본적으로 2차원 배열이 필요가 없으니 ㅠㅠㅠㅠㅠㅠ
+그리고 알고리즘은 문제가 없었지만, 처음 버전에 prime 배열을 구글링해서
+끌어온 배열로 싹 다 넣었는데, 도저히 풀리지가 않아서 보니... 소수가
+이상하더라...결국 소수 직접구해서 prime에 넣었고 잘 된다.
+201609120222*/
